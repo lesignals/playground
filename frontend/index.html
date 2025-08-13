@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Semgrep代码安全分析Playground - 在线测试和编辑安全规则">
+    <meta name="keywords" content="semgrep, security, code analysis, playground">
+    <title>Semgrep Playground</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+          'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+          sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      
+      #root {
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+      }
+      
+      .loading {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        font-size: 18px;
+        color: #666;
+      }
+      
+      /* Monaco Editor优化 */
+      .monaco-editor {
+        --vscode-foreground: #24292f;
+        --vscode-editor-background: #ffffff;
+      }
+      
+      @media (prefers-color-scheme: dark) {
+        .monaco-editor {
+          --vscode-foreground: #c9d1d9;
+          --vscode-editor-background: #0d1117;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root">
+      <div class="loading">
+        正在加载 Semgrep Playground...
+      </div>
+    </div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

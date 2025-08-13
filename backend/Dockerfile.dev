@@ -1,0 +1,30 @@
+FROM node:18-alpine
+
+# 安装Semgrep和开发工具
+RUN apk add --no-cache \
+    python3 \
+    py3-pip \
+    git \
+    curl \
+    && pip3 install semgrep \
+    && rm -rf /var/cache/apk/*
+
+WORKDIR /app
+
+# 复制package文件
+COPY package*.json ./
+
+# 安装所有依赖（包括开发依赖）
+RUN npm ci && npm cache clean --force
+
+# 复制源代码
+COPY . .
+
+# 创建临时目录
+RUN mkdir -p /tmp/semgrep-playground
+
+# 暴露端口
+EXPOSE 3001
+
+# 开发模式启动
+CMD ["npm", "run", "dev"]

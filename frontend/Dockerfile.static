@@ -1,0 +1,14 @@
+# 静态版前端 - 直接使用HTML文件
+FROM nginx:alpine
+
+# 复制nginx配置
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# 复制静态HTML文件
+COPY public/ /usr/share/nginx/html/
+
+# 暴露端口
+EXPOSE 3000
+
+# 启动nginx
+CMD ["nginx", "-g", "daemon off;"]
