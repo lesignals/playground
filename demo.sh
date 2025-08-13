@@ -160,6 +160,8 @@ show_access_info() {
     log_warning "注意: 这是演示版本，返回模拟的分析结果"
     log_info "如需完整Semgrep功能，请参考README.md安装真实版本"
     echo
+    log_info "💡 服务将持续运行，使用 Ctrl+C 或运行停止命令来关闭"
+    echo
 }
 
 # 主函数
@@ -173,20 +175,25 @@ main() {
         echo
         log_success "🎊 一切就绪，开始体验 Semgrep Playground！"
         echo
+        log_info "🔔 提示: 脚本已完成，服务继续运行在后台"
+        log_info "   如需停止服务，请运行: docker-compose -f docker-compose.demo.yml down"
+        echo
     else
         log_error "启动失败，请检查系统状态"
         exit 1
     fi
 }
 
-# 信号处理
-cleanup() {
+# 信号处理 - 只在脚本被中断时清理
+cleanup_on_interrupt() {
     echo
-    log_info "正在清理..."
+    log_info "收到中断信号，正在停止服务..."
     docker-compose -f docker-compose.demo.yml down 2>/dev/null || true
+    exit 0
 }
 
-trap cleanup EXIT
+# 只捕获中断信号，不在正常退出时清理
+trap cleanup_on_interrupt INT TERM
 
 # 执行主函数
 main "$@"
