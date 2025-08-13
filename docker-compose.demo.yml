@@ -19,11 +19,11 @@ services:
       retries: 3
       start_period: 10s
 
-  # 前端服务 - 静态版
+  # 前端服务 - 超级简化版
   frontend:
     build:
       context: ./frontend
-      dockerfile: Dockerfile.static
+      dockerfile: Dockerfile.simple
     container_name: semgrep-playground-frontend
     restart: unless-stopped
     ports:
